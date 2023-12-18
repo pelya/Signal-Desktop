@@ -161,7 +161,7 @@ export function Lightbox({
   }, [setVideoTime, videoElement]);
 
   const handleSave = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: KeyboardEvent | React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     if (isViewOnce) {
       return;
@@ -211,10 +211,16 @@ export function Lightbox({
           onNext(event);
           break;
 
+        case 's':
+        case 'd':
+        case 'Enter':
+          handleSave(event);
+          break;
+
         default:
       }
     },
-    [closeLightbox, onNext, onPrevious]
+    [closeLightbox, onNext, onPrevious, handleSave]
   );
 
   const onClose = (event: React.MouseEvent<HTMLElement>) => {
